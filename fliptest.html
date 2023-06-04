@@ -1,56 +1,144 @@
 <html>
-<head>
-  <title>Rotation</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
-</head>
-<body>
-<script type="text/javascript">
-    AFRAME.registerComponent('drag-rotate-component',{
-      schema : { speed : {default:1}},
-      init : function(){
-        this.ifMouseDown = false;
-        this.x_cord = 0;
-        this.y_cord = 0;
-        document.addEventListener('mousedown',this.OnDocumentMouseDown.bind(this));
-        document.addEventListener('mouseup',this.OnDocumentMouseUp.bind(this));
-        document.addEventListener('mousemove',this.OnDocumentMouseMove.bind(this));
-      },
-      OnDocumentMouseDown : function(event){
-        this.ifMouseDown = true;
-        this.x_cord = event.clientX;
-        this.y_cord = event.clientY;
-      },
-      OnDocumentMouseUp : function(){
-        this.ifMouseDown = false;
-      },
-      OnDocumentMouseMove : function(event)
-      {
-        if(this.ifMouseDown)
-        {
-          var temp_x = event.clientX-this.x_cord;
-          var temp_y = event.clientY-this.y_cord;
-          if(Math.abs(temp_y)<Math.abs(temp_x))
-          {
-            this.el.object3D.rotateY(temp_x*this.data.speed/1000);
-          }
-          else
-          {
-            this.el.object3D.rotateX(temp_y*this.data.speed/1000);
-          }
-          this.x_cord = event.clientX;
-          this.y_cord = event.clientY;
-        }
-      }
-    });
-  </script>
-  <a-scene>
-    <a-box id="b1" color="green" position="2 2 -3" drag-rotate-component></a-box>
-    <a-box id="b2" color="blue" position="-2 2 -3"></a-box>
-    <a-camera position="0 0 0" look-controls="enabled:false">
-      <a-cursor></a-cursor>
-    </a-camera>
-  </a-scene>
-  
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <script>
+      // Wait for AR.js to finish loading
+      document.addEventListener('DOMContentLoaded', function () {
+        setTimeout(function() {
+          document.getElementById("loading-wrapper").style.display = "none";
+          var component_box = document.querySelector('#myPlane');
+          component_box.setAttribute('visible', true);
+          var component_maploc = document.querySelector('#map_loc');
+          component_maploc.setAttribute('visible', true);
+        }, 3000);
+      });
+    </script>
+   
+  </head>
+  <body style="margin : 0px; overflow: hidden;">
+    <html>
+      <div class="arjs-loader">
+        <div id="loading-wrapper">
+          <div id="loading-text">LOADING</div>
+          <div id="loading-content"></div>
+        </div>
+      </div>
+        <a-scene 
+          loading-screen="enabled:false"
+            
+            r-mode-ui="enabled: false;"
+            renderer="logarithmicDepthBuffer: true;"
+            embedded
+            arjs
+        >
+            <a-assets>
+                <img id="invitation" src="invitation.png">
+                <img id="loc" src="loc.png">
+                <img id="map" src="map.png">
+              </a-assets>
+            <a-box id="myPlane"  position="0 0 -4"  material="side: double" wireframe="true" side="double" rotation="-45 0 0" depth="0.1" color="#f2f0eb" scale="0.460 0.560 1" visible="false"  card>
+              <a-entity light="type: ambient; color: #f5e1e1;intensity: 2"  position="0 0 0"></a-entity>  
+              <a-image src="#invitation" position="0 0 0.06" width="3" height="4" side="double"></a-image>
+                <a-image src="#map" position="0 0 -0.06" width="3" height="4" side="double"></a-image>                
+            </a-box>
+            <a-entity position="0 0 -4" rotation="0 1 0" scale="3 3 0" id="map_loc" visible="false" map_loc_entity></a-entity>
+            <!-- <a-image src="#loc" position="0 0 -4" rotation="0 1 0" width="0.7" height="0.8" side="double"></a-image> -->
+            
+            <a-camera >
+              <a-entity cursor="rayOrigin:mouse"></a-entity>
+            </a-camera>
+            <!-- <a-entity camera></a-entity> -->
+          </a-scene>
+          <script>
+            AFRAME.registerComponent("card", {
+            init: function() {
+            this.el.addEventListener("click", (e)=>{
+                var sceneEl = document.querySelector('a-scene');
+                var plane=sceneEl.querySelector('#myPlane');
+                var currentRotation = plane.getAttribute("rotation");
+                console.log("====once?",-currentRotation.x)
+                console.log("====once?",-currentRotation.y)
+                console.log("====once?",-currentRotation.z)
+            
+                if(plane.classList.contains('active')){
+                    console.log("====yes")
+                    plane.classList.remove('active')
+                    // plane.setAttribute("dur", "1000");
+                    // plane.setAttribute('rotation', {x:-45, y: -currentRotation.y, z: -currentRotation.z});
+                    // plane.emit(`startanim001`, null, false);
+                    plane.setAttribute('animation', 'property: rotation; to: -45 0 0');
+                    setTimeout(function() {
+                      var img=sceneEl.querySelector('#map_loc');
+                      
+                      img.setAttribute('animation', 'property: position; to: 0 0 -4');
+                      setTimeout(function() {
+                    let image = img.querySelector('a-image');
+                  
+                    
+                    img.removeChild(image);
+                    
+                    img.removeAttribute('animation');
+                    
+                    img.setAttribute('position', '0 0 -4');
+                  }, 200);
+                  }, 500);
+                    
+                    
+                    // plane.setAttribute('animation__001', {'property': 'rotation',
+                    //              'to': {x: -45, y: -currentRotation.y, z: -currentRotation.z},                                 
+                    //              'startEvents': 'startanim001'});
+                }
+                else{
+                  
+                 
+                    plane.classList.add('active')
+                    // plane.setAttribute("dur", "1000");
+                    // plane.setAttribute('rotation', {x:135, y: -currentRotation.y, z: -currentRotation.z});
+                    console.log("====no")
+                    // plane.emit(`startanim001`, null, false);
+                    plane.setAttribute('animation', 'property: rotation; to: 135 0 -180');
+                    setTimeout(function() {
+                      var img=sceneEl.querySelector('#map_loc');
+
+                      let image = document.createElement('a-image');
+                      image.setAttribute('src', 'loc.png');
+                      image.setAttribute('side','double')
+                      image.setAttribute('scale', '0.3 0.3 0');
+                      image.setAttribute('position', '0 0 0');
+                     // image.setAttrubute("cursor", "rayOrigin", "mouse")
+                     
+                      
+                      img.appendChild(image)
+                      //img.appendChild(text)
+                      img.setAttribute('animation', 'property: position; to: 0 0.599 -4');
+                     
+                  
+                  }, 1000);
+                    
+                   
+                }
+            
+            })
+            }
+            })
+            </script>
+          <script>
+            AFRAME.registerComponent("map_loc_entity", {
+            init: function() {
+            this.el.addEventListener("click", (e)=>{
+              console.log("==INMAPPPPPPP==")
+              window.location.href='https://www.google.com/maps/dir//Chinthavalappu+Flats,+Palayam,+Kozhikode,+Kerala+673002/@11.2505622,75.7182075,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3ba65941738769c5:0x751198bd8adbc973!2m2!1d75.7882391!2d11.2505705?entry=ttu'
+
+            })
+            }
+            })
+          </script>
+          
+    </html>
 </body>
+
 </html>
+  
