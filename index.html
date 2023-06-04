@@ -1,5 +1,6 @@
 <html>
   <head>
+    <link rel="stylesheet" href="style.css">
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
@@ -7,22 +8,26 @@
       // Wait for AR.js to finish loading
       document.addEventListener('DOMContentLoaded', function () {
         setTimeout(function() {
-          
-          
+          document.getElementById("loading-wrapper").style.display = "none";
           var component_box = document.querySelector('#myPlane');
           component_box.setAttribute('visible', true);
           var component_maploc = document.querySelector('#map_loc');
           component_maploc.setAttribute('visible', true);
-        }, 1000);
+        }, 2000);
       });
     </script>
+   
   </head>
   <body style="margin : 0px; overflow: hidden;">
     <html>
       <div class="arjs-loader">
-      <div>Loading, please wait...</div>
-    </div>
+        <div id="loading-wrapper">
+          <div id="loading-text">LOADING</div>
+          <div id="loading-content"></div>
+        </div>
+      </div>
         <a-scene 
+          loading-screen="enabled:false"
             cursor="rayOrigin: mouse"
             r-mode-ui="enabled: false;"
             renderer="logarithmicDepthBuffer: true;"
