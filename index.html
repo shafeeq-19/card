@@ -39,7 +39,7 @@
                 <img id="loc" src="loc.png">
                 <img id="map" src="map.png">
               </a-assets>
-            <a-box id="myPlane" position="0 0 -4"  material="side: double" wireframe="true" side="double" rotation="-45 0 0" depth="0.1" color="#f2f0eb" scale="0.460 0.560 1" visible="false" cursor-listener card>
+            <a-box id="myPlane" position="0 0.5 -4"  material="side: double" wireframe="true" side="double" rotation="-45 0 0" depth="0.1" color="#f2f0eb" scale="0.460 0.560 1" visible="false" cursor-listener card>
               <a-entity light="type: ambient; color: #f5e1e1;intensity: 2"  position="0 0 0"></a-entity>  
               <a-image src="#invitation" position="0 0 0.06" width="3" height="4" side="double"></a-image>
                 <a-image src="#map" position="0 0 -0.06" width="3" height="4" side="double"></a-image>                
@@ -47,7 +47,7 @@
             <a-entity position="0 0.5 -4" rotation="0 1 0" scale="3 3 0" id="map_loc" visible="false" cursor-listener map_loc_entity></a-entity>
             <!-- <a-image src="#loc" position="0 2 -4" rotation="0 1 0" width="0.7" height="0.8" side="double"></a-image> -->
             
-            <a-camera position="0 1.6 0"></a-camera>
+            <a-camera position="0 0.5 0"></a-camera>
           </a-scene>
           <script>
             AFRAME.registerComponent("card", {
@@ -70,17 +70,16 @@
                     setTimeout(function() {
                       var img=sceneEl.querySelector('#map_loc');
                       
-                      img.setAttribute('animation', 'property: position; to: 0 2 -4');
+                      img.setAttribute('animation', 'property: position; to: 0 0 -4');
                       setTimeout(function() {
                     let image = img.querySelector('a-image');
-                    let text = img.querySelector('a-text');
+                  
                     
                     img.removeChild(image);
-                    img.removeChild(text);
                     
                     img.removeAttribute('animation');
                     
-                    img.setAttribute('position', '0 2 -4');
+                    img.setAttribute('position', '0 0 -4');
                   }, 200);
                   }, 500);
                     
@@ -103,20 +102,15 @@
 
                       let image = document.createElement('a-image');
                       image.setAttribute('src', 'loc.png');
-                      image.setAttribute('position','0 0 0')
                       image.setAttribute('side','double')
-                      image.setAttribute('scale', '0.4 0.4 0');
+                      image.setAttribute('scale', '0.2 0.2 0');
+                      //image.setAttribute('position', '0 0 0');
 
-                      let text = document.createElement('a-text');
-                      text.setAttribute('text', 'font: mozillavr; value: Click Me; color: #ffffff;');
-                      //text.setAttribute('geometry', 'primitive:plane;');
-                      
-                      //text.setAttribute('scale', '2 2 1');
-                      text.setAttribute('position', '0 0 6');
+                     
                       
                       img.appendChild(image)
                       //img.appendChild(text)
-                      img.setAttribute('animation', 'property: position; to: 0 1 -4');
+                      img.setAttribute('animation', 'property: position; to: 0 0.9 -4');
                      
                   
                   }, 1000);
