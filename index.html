@@ -11,8 +11,8 @@
           document.getElementById("loading-wrapper").style.display = "none";
           var component_box = document.querySelector('#myPlane');
           component_box.setAttribute('visible', true);
-          var component_maploc = document.querySelector('#map_loc');
-          component_maploc.setAttribute('visible', true);
+          //var component_maploc = document.querySelector('#map_loc');
+          //component_maploc.setAttribute('visible', true);
         }, 3000);
       });
     </script>
@@ -44,8 +44,8 @@
               <a-image src="#invitation" position="0 0 0.06" width="3" height="4" side="double"></a-image>
                 <a-image src="#map" position="0 0 -0.06" width="3" height="4" side="double"></a-image>                
             </a-box>
-            <a-entity position="0 0 -4" rotation="0 1 0" scale="3 3 0" id="map_loc" visible="false" map_loc_entity></a-entity>
-            <!-- <a-image src="#loc" position="0 2 -4" rotation="0 1 0" width="0.7" height="0.8" side="double"></a-image> -->
+            <a-image src="#loc" position="0 0 -4" rotation="0 1 0" scale="0.5 0.5 0" id="map_loc" visible="false" map_loc_entity></a-image>
+            <!-- <a-image src="#loc" position="0 0 -4" rotation="0 1 0" width="0.7" height="0.8" side="double"></a-image> -->
             
             <a-camera >
               <a-entity cursor="rayOrigin:mouse"></a-entity>
@@ -75,11 +75,11 @@
                       
                       img.setAttribute('animation', 'property: position; to: 0 0 -4');
                       setTimeout(function() {
-                    let image = img.querySelector('a-image');
+                    //let image = img.querySelector('a-image');
                   
                     
-                    img.removeChild(image);
-                    
+                   // img.removeChild(image);
+                   img.setAttribute('visible','false')
                     img.removeAttribute('animation');
                     
                     img.setAttribute('position', '0 0 -4');
@@ -103,15 +103,15 @@
                     setTimeout(function() {
                       var img=sceneEl.querySelector('#map_loc');
 
-                      let image = document.createElement('a-image');
-                      image.setAttribute('src', 'loc.png');
-                      image.setAttribute('side','double')
-                      image.setAttribute('scale', '0.3 0.3 0');
-                      image.setAttribute('position', '0 0 0');
+                     // let image = document.createElement('a-image');
+                      //image.setAttribute('src', 'loc.png');
+                     // image.setAttribute('side','double')
+                     // image.setAttribute('scale', '0.3 0.3 0');
+                    //  image.setAttribute('position', '0 0 0');
                      // image.setAttrubute("cursor", "rayOrigin", "mouse")
                      
-                      
-                      img.appendChild(image)
+                     img.setAttribute('visible','true')
+                      //img.appendChild(image)
                       //img.appendChild(text)
                       img.setAttribute('animation', 'property: position; to: 0 0.7 -4');
                      
