@@ -1,0 +1,115 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v6.0.0/dist/aframe-extras.min.js"></script>
+  </head>
+  <body>
+    <html>
+        <a-scene cursor="rayOrigin: mouse">
+            <a-assets>
+                <img id="invitation" src="invitation.png">
+                <img id="loc" src="loc.png">
+                <img id="map" src="map.png">
+              </a-assets>
+            <a-box id="myPlane" position="0 1.5 -4"  material="side: double" wireframe="true" side="double" rotation="-45 0 0" depth="0.1" color="#f2f0eb" width="3" height="4" cursor-listener card>
+              <a-entity light="type: ambient; color: #f5e1e1;intensity: 2"  position="0 0 0"></a-entity>  
+              <a-image src="#invitation" position="0 0 0.06" width="3" height="4" side="double"></a-image>
+                <a-image src="#map" position="0 0 -0.06" width="3" height="4" side="double"></a-image>                
+            </a-box>
+            <a-entity position="0 2 -4" rotation="0 1 0" id="map_loc" cursor-listener map_loc_entity></a-entity>
+            <!-- <a-image src="#loc" position="0 2 -4" rotation="0 1 0" width="0.7" height="0.8" side="double"></a-image> -->
+            <a-camera position="0 1.6 0"></a-camera>
+          </a-scene>
+          <script>
+            AFRAME.registerComponent("card", {
+            init: function() {
+            this.el.addEventListener("click", (e)=>{
+                var sceneEl = document.querySelector('a-scene');
+                var plane=sceneEl.querySelector('#myPlane');
+                var currentRotation = plane.getAttribute("rotation");
+                console.log("====once?",-currentRotation.x)
+                console.log("====once?",-currentRotation.y)
+                console.log("====once?",-currentRotation.z)
+            
+                if(plane.classList.contains('active')){
+                    console.log("====yes")
+                    plane.classList.remove('active')
+                    // plane.setAttribute("dur", "1000");
+                    // plane.setAttribute('rotation', {x:-45, y: -currentRotation.y, z: -currentRotation.z});
+                    // plane.emit(`startanim001`, null, false);
+                    plane.setAttribute('animation', 'property: rotation; to: -45 0 0');
+                    setTimeout(function() {
+                      var img=sceneEl.querySelector('#map_loc');
+                      
+                      img.setAttribute('animation', 'property: position; to: 0 2 -4');
+                      setTimeout(function() {
+                    let image = img.querySelector('a-image');
+                    let text = img.querySelector('a-entity');
+                    
+                    img.removeChild(image);
+                    img.removeChild(text);
+                    
+                    img.removeAttribute('animation');
+                    
+                    img.setAttribute('position', '0 2 -4');
+                  }, 200);
+                  }, 500);
+                    
+                    
+                    // plane.setAttribute('animation__001', {'property': 'rotation',
+                    //              'to': {x: -45, y: -currentRotation.y, z: -currentRotation.z},                                 
+                    //              'startEvents': 'startanim001'});
+                }
+                else{
+                  
+                 
+                    plane.classList.add('active')
+                    // plane.setAttribute("dur", "1000");
+                    // plane.setAttribute('rotation', {x:135, y: -currentRotation.y, z: -currentRotation.z});
+                    console.log("====no")
+                    // plane.emit(`startanim001`, null, false);
+                    plane.setAttribute('animation', 'property: rotation; to: 135 0 -180');
+                    setTimeout(function() {
+                      var img=sceneEl.querySelector('#map_loc');
+                      let image = document.createElement('a-image');
+                      image.setAttribute('src', 'loc.png');
+                      let text = document.createElement('a-entity');
+                      text.setAttribute('text', 'font: mozillavr; value: Click Me; color: #ffffff;');
+                      text.setAttribute('scale', '3 3 2');
+                      text.setAttribute('position', '1.25 -0.6 0');
+                      
+                      img.appendChild(image)
+                      img.appendChild(text)
+                      img.setAttribute('animation', 'property: position; to: 0 3 -4');
+                      // setTimeout(function() {
+                        
+                      // },500);
+                  
+                  }, 1000);
+                    
+                    // plane.setAttribute('animation__001', {'property': 'rotation',
+                    //              'to': {x: 135, y: -currentRotation.y, z: -currentRotation.z},                                 
+                    //              'startEvents': 'startanim001'});
+                }
+            
+            })
+            }
+            })
+            </script>
+          <script>
+            AFRAME.registerComponent("map_loc_entity", {
+            init: function() {
+            this.el.addEventListener("click", (e)=>{
+              console.log("==INMAPPPPPPP==")
+              window.location.href='https://www.google.com/maps/dir//Chinthavalappu+Flats,+Palayam,+Kozhikode,+Kerala+673002/@11.2505622,75.7182075,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3ba65941738769c5:0x751198bd8adbc973!2m2!1d75.7882391!2d11.2505705?entry=ttu'
+
+            })
+            }
+            })
+          </script>
+          
+    </html>
+</body>
+
+</html>
+  
