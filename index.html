@@ -44,7 +44,7 @@
               <a-image src="#invitation" position="0 0 0.06" width="3" height="4" side="double"></a-image>
                 <a-image src="#map" position="0 0 -0.06" width="3" height="4" side="double"></a-image>                
             </a-box>
-            <a-image src="#loc" position="0 0 -4" rotation="0 1 0" scale="0.6 0.6 0" id="map_loc" visible="false" map_loc_entity></a-image>
+            <a-image src="#loc" position="0 1.4 -4" rotation="0 1 0" scale="0.6 0.6 0" id="map_loc" visible="false" map_loc_entity></a-image>
             <!-- <a-image src="#loc" position="0 0 -4" rotation="0 1 0" width="0.7" height="0.8" side="double"></a-image> -->
             
             <a-camera >
@@ -73,7 +73,7 @@
                     setTimeout(function() {
                       var img=sceneEl.querySelector('#map_loc');
                       
-                      img.setAttribute('animation', 'property: position; to: 0 0 -4');
+                      
                       setTimeout(function() {
                     //let image = img.querySelector('a-image');
                   
@@ -82,7 +82,7 @@
                    img.setAttribute('visible','false')
                     img.removeAttribute('animation');
                     
-                    img.setAttribute('position', '0 0 -4');
+                   // img.setAttribute('position', '0 0 -4');
                   }, 200);
                   }, 500);
                     
@@ -113,7 +113,7 @@
                      img.setAttribute('visible','true')
                       //img.appendChild(image)
                       //img.appendChild(text)
-                      img.setAttribute('animation', 'property: position; to: 0 1.2 -4');
+                      //img.setAttribute('animation', 'property: position; to: 0 0.5 -4');
                      
                   
                   }, 1000);
