@@ -39,17 +39,19 @@
                 <img id="loc" src="loc.png">
                 <img id="map" src="map.png">
               </a-assets>
-            <a-box id="myPlane"  position="0 -0.5 -4"  material="side: double" wireframe="true" side="double" rotation="-45 0 0" depth="0.1" color="#f2f0eb" scale="0.460 0.560 1" visible="false"  card>
+             
+            <a-box id="myPlane"  position="0 -0.5 -4"  material="side: double" wireframe="true" side="double" rotation="-45 0 0" depth="0.1" color="#f2f0eb" scale="0.460 0.560 1" visible="false" cursor="rayOrigin:mouse" card>
               <a-entity light="type: ambient; color: #f5e1e1;intensity: 2"  position="0 0 0"></a-entity>  
               <a-image src="#invitation" position="0 0 0.06" width="3" height="4" side="double"></a-image>
                 <a-image src="#map" position="0 0 -0.06" width="3" height="4" side="double"></a-image>                
             </a-box>
+            <a-image src="#loc" position="0 1.2 -6" rotation="0 1 0" scale="0.6 0.6 0" id="map_loc" visible="false" cursor="rayOrigin:mouse" map_loc_entity></a-image>
             <!-- <a-cone color="tomato" position="0 1 -4" scale="0.6 0.6 0" radius-bottom="2" radius-top="0.5"></a-cone> -->
-            <a-image src="#loc" position="0 1.2 -4" rotation="0 1 0" scale="0.6 0.6 0" id="map_loc" visible="false" map_loc_entity></a-image>
+            
             <!-- <a-image src="#loc" position="0 0 -4" rotation="0 1 0" width="0.7" height="0.8" side="double"></a-image> -->
             
             <a-camera >
-              <a-entity cursor="rayOrigin:mouse"></a-entity>
+              <!-- <a-entity cursor="rayOrigin:mouse"></a-entity> -->
             </a-camera>
             <!-- <a-entity camera></a-entity> -->
           </a-scene>
