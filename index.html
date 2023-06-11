@@ -29,31 +29,31 @@
         <a-scene 
           loading-screen="enabled:false"
           cursor__mouse="rayOrigin: mouse"
-          cursor__xrselect="rayOrigin: xrselect"
           raycaster="objects:#objects *;"
-            r-mode-ui="enabled: false;"
-            renderer="logarithmicDepthBuffer: true;"
-            embedded
-            arjs
+          r-mode-ui="enabled: false;"
+          renderer="logarithmicDepthBuffer: true;"
+          embedded
+          arjs
         >
             <a-assets>
                 <img id="invitation" src="invitation.png">
                 <img id="loc" src="loc.png">
                 <img id="map" src="map.png">
               </a-assets>
-              <a-camera >
-                <a-entity cursor="rayOrigin:mouse" look-controls></a-entity>
-              </a-camera>
-            <a-box id="myPlane"  position="0 0 -4"  material="side: double" wireframe="true" side="double" rotation="-45 0 0" depth="0.1" color="#f2f0eb" scale="0.460 0.560 1" visible="false"  card>
+           
+            <a-box id="myPlane"  position="0 0 -4"  material="side: double" wireframe="true" side="double" rotation="-45 0 0" depth="0.1" color="#f2f0eb" scale="0.460 0.560 1" visible="false" clickable  card>
               <a-entity light="type: ambient; color: #f5e1e1;intensity: 2"  position="0 0 0"></a-entity>  
               <a-image src="#invitation" position="0 0 0.06" width="3" height="4" side="double"></a-image>
                 <a-image src="#map" position="0 0 -0.06" width="3" height="4" side="double"></a-image>                
             </a-box>
-            <a-entity position="0 0 4" rotation="0 0 0" scale="2 2 0" id="map_loc"  map_loc_entity></a-entity>
-            <!-- <a-image src="#loc" position="0 0 -4" rotation="0 1 0" width="0.7" height="0.8" side="double"></a-image> -->
+            <a-entity position="0 0 4" rotation="0 0 0" scale="2 2 0" id="map_loc" clickable  map_loc_entity></a-entity>
+           
             
-            
-            <!-- <a-entity camera></a-entity> -->
+           <a-entity id="rig">
+              <a-entity camera position="0 2 0" look-controls wasd-controls> 
+                <a-cursor id="cousor" raycaster fuse="true" fuse-timeout="3000"> </a-cursor>
+              </a-entity>
+           </a-entity>
           </a-scene>
           <script>
             AFRAME.registerComponent("card", {
