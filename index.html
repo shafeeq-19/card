@@ -46,7 +46,7 @@
               <a-image src="#invitation" position="0 0 0.06" width="3" height="4" side="double"></a-image>
                 <a-image src="#map" position="0 0 -0.06" width="3" height="4" side="double"></a-image>                
             </a-box>
-            <a-entity position="0 0 4" rotation="0 0 0" scale="2 2 0" id="map_loc" clickable  map_loc_entity></a-entity>
+            <a-entity position="0 0 4" rotation="0 0 0" scale="3 3 0" id="map_loc" clickable  map_loc_entity></a-entity>
            
             
            <a-entity id="rig">
@@ -111,14 +111,14 @@
                       let image = document.createElement('a-image');
                       image.setAttribute('src', 'loc.png');
                       image.setAttribute('side','double')
-                      image.setAttribute('scale', '0.1 0.1 0');
+                      image.setAttribute('scale', '0.3 0.3 0');
                       image.setAttribute('position', '0 0 0');
                      // image.setAttrubute("cursor", "rayOrigin", "mouse")
                      
                       
                       img.appendChild(image)
                       //img.appendChild(text)
-                      img.setAttribute('animation', 'property: position; to: 0 1.5 -4');
+                      img.setAttribute('animation', 'property: position; to: 0 1.2 -4');
                      
                   
                   }, 1000);
