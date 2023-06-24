@@ -47,11 +47,12 @@
                 <a-image src="#map" position="0 0 -0.06" width="3" height="4" side="double"></a-image>                
             </a-box>
             <a-entity position="0 -1 -4" rotation="0 0 0" scale="3 3 0" id="map_loc" clickable  map_loc_entity></a-entity>
-           
-            
-           <a-entity id="rig">
+        
+           <a-entity >
               <a-entity camera position="0 -1 0" look-controls wasd-controls> 
-                <a-cursor id="cousor" raycaster fuse="true" fuse-timeout="3000"> </a-cursor>
+                <a-cursor geometry="primitive: ring; radiusInner: 0.001; radiusOuter: 0.04" material="color: red;src: hnd1.png;" raycaster fuse="true" fuse-timeout="3000"> 
+                  
+                </a-cursor>
               </a-entity>
            </a-entity>
           </a-scene>
