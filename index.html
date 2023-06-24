@@ -41,7 +41,7 @@
                 <img id="map" src="map.png">
               </a-assets>
            
-            <a-box id="myPlane"  position="0 -1.5 -4"  material="side: double" wireframe="true" side="double" rotation="-45 0 0" depth="0.1" color="#f2f0eb" scale="0.460 0.560 1" visible="false" clickable  card>
+            <a-box id="myPlane"  position="0 -4 -4"  material="side: double" wireframe="true" side="double" rotation="-45 0 0" depth="0.1" color="#f2f0eb" scale="0.460 0.560 1" visible="false" clickable  card>
               <a-entity light="type: ambient; color: #f5e1e1;intensity: 2"  position="0 0 0"></a-entity>  
               <a-image src="#invitation" position="0 0 0.06" width="3" height="4" side="double"></a-image>
                 <a-image src="#map" position="0 0 -0.06" width="3" height="4" side="double"></a-image>                
@@ -49,7 +49,7 @@
             <a-entity position="0 -1 -4" rotation="0 0 0" scale="3 3 0" id="map_loc" clickable  map_loc_entity></a-entity>
         
            <a-entity >
-              <a-entity camera position="0 -1 0" look-controls wasd-controls> 
+              <a-entity camera position="0 -4 0" look-controls wasd-controls> 
                 <a-cursor geometry="primitive: ring; radiusInner: 0.001; radiusOuter: 0.04" material="color: red;src: hnd1.png;" raycaster fuse="true" fuse-timeout="3000"> 
                   
                 </a-cursor>
